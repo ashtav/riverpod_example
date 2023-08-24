@@ -104,7 +104,6 @@ class ResHandler {
         if (statusCode == 500) {
           message = 'Internal server error';
         } else if (statusCode == 422) {
-
           // if the response is 422, we need to get the error message from the server
           if (map['errors'] != null) {
             Map.from(map['errors']).forEach((key, value) {
@@ -119,6 +118,10 @@ class ResHandler {
       } catch (e) {
         // if failed, let it be default
       }
+    }
+
+    if (!ok && !_ignoreErrorStatus.contains(statusCode)) {
+      LzToast.show(message ?? response.statusMessage);
     }
 
     onRequest?.call(statusCode ?? 0, responseData);

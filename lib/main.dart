@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:riverpod_example/app/data/local/shared_preferences.dart';
+import 'package:riverpod_example/app/utils/fetch/src/fetch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/core/theme.dart';
@@ -12,6 +13,13 @@ void main() async {
   LazyUi.config(radius: 7.0, theme: AppTheme.light);
 
   prefs = SharedPreferences.getInstance();
+
+  // use fetch
+  UseFetch(
+      baseUrl: 'https://dummyjson.com/',
+      onRequest: (status, data) {
+        logg('listen to request: $status');
+      }).init();
 
   runApp(const ProviderScope(child: MyApp()));
 }
