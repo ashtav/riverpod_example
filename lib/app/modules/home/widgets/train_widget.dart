@@ -28,7 +28,7 @@ class TrainWidget extends ConsumerWidget {
         ),
         Wrap(
           children: ['32', '15', '45', '29', '41'].generate((item, i) {
-            return InkW(
+            return InkTouch(
               onTap: () {},
               padding: Ei.all(20),
               color: Colors.black12,

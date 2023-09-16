@@ -5,7 +5,7 @@ import 'package:riverpod_example/app/data/local/shared_preferences.dart';
 import 'package:riverpod_example/app/utils/fetch/src/fetch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/core/theme.dart';
+import 'app/core/constants/theme.dart';
 import 'app/modules/home/home_view.dart';
 
 void main() async {
@@ -33,15 +33,8 @@ class MyApp extends StatelessWidget {
       title: 'Riverpod Example',
       theme: appTheme,
       debugShowCheckedModeBanner: false,
-      builder: (BuildContext context, Widget? widget) {
-        double fontDeviceSize = MediaQuery.of(context).textScaleFactor;
-
-        // prevent user from scaling font size
-        return MediaQuery(
-            data: MediaQuery.of(context).copyWith(
-              textScaleFactor: fontDeviceSize > 1.1 ? 1.1 : 1.0,
-            ),
-            child: LzToastOverlay(child: widget));
+      builder: (BuildContext context, Widget? child) {
+        return LazyUi.builder(context, child);
       },
       home: const HomeView(),
     );

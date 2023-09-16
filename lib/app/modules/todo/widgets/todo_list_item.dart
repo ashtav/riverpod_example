@@ -10,12 +10,12 @@ class TodoListItem extends ConsumerWidget {
     final key = GlobalKey();
     bool completed = todo.completed.orIf();
 
-    return InkW(
+    return InkTouch(
       onTap: () {
         final options =
             [completed ? 'Uncomplete' : 'Set Complete'].options(icons: [completed ? Ti.x : Ti.checks], dangers: [1]);
 
-        LzDropdownOption.show(key.context, options: options, offset: const CustomOffset(by: 48), onSelect: (state) {
+        DropX.show(key.context, options: options, onSelect: (state) {
           final notifier = ref.read(todoProvider.notifier);
           notifier.markTodo(todo.id!, completed);
         });
@@ -31,9 +31,9 @@ class TodoListItem extends ConsumerWidget {
               Textr(
                 todo.todo.orIf(),
                 margin: Ei.only(l: 15),
-              ).flexible()
+              ).lz.flexible()
             ],
-          ).flexible(),
+          ).lz.flexible(),
           Icon(Ti.dotsVertical, key: key, color: Colors.black45)
         ],
       ),

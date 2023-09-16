@@ -24,7 +24,7 @@ class TodoView extends ConsumerWidget {
                   : () {
                       notifier.markTodo(0, true);
                     },
-            ).opacity(value ? 1 : .3);
+            ).lz.opacity(value ? 1 : .3);
           }),
 
           // Consumer(
@@ -64,7 +64,7 @@ class TodoView extends ConsumerWidget {
                 ),
               );
             },
-            loading: () => Loader.bar(message: 'Loading...'),
+            loading: () => LzLoader.bar(message: 'Loading...'),
             error: (error, _) => LzNoData(message: 'Opps! $error'),
           );
         },

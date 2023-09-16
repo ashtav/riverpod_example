@@ -41,7 +41,7 @@ class UsersView extends ConsumerWidget {
                   ),
                 );
               },
-              loading: () => Loader.bar(message: 'Loading...'),
+              loading: () => LzLoader.bar(message: 'Loading...'),
               error: (error, _) => LzNoData(message: 'Opps! $error'),
             );
           },
@@ -58,27 +58,27 @@ class ListItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final key = GlobalKey();
 
-    return InkW(
+    return InkTouch(
       onTap: () {
-        final options = ['Edit', 'Delete'].options(icons: [Ti.pencil, Ti.trash], dangers: [1]);
-        final subOptions = {
-          1: ['Yes, Delete It!', 'Cancel'].options(values: [0, 1])
-        };
+        final options = ['Edit', 'Delete'].options(options: {
+          1: ['Yes, Delete It!', 'Cancel'].options(values: ['Delete'], pops: [1])
+        }, icons: [
+          Ti.pencil,
+          Ti.trash
+        ], dangers: [
+          1
+        ]);
 
-        LzDropdownOption.show(key.context, options: options, subOptions: subOptions, offset: const CustomOffset(by: 48),
-            onSelect: (state) {
-          final value = state.option.value;
+        DropX.show(key.context, options: options, onSelect: (state) {
+          final value = state.value;
 
-          if (state.option.option == 'Edit') {
+          if (state.option == 'Edit') {
             context.bottomSheet(FormUser(name: name, index: index));
             return;
           }
 
-          if (value == 1) {
-            state.back();
-          } else if (value == 0) {
+          if (value == 'Delete') {
             ref.read(userProvider.notifier).delete(index);
-            context.pop();
           }
         });
       },

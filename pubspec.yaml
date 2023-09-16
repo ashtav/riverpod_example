@@ -35,7 +35,7 @@ dependencies:
   flutter_hooks: ^0.20.0
   flutter_localization: ^0.1.13
   hooks_riverpod: ^2.3.6
-  lazyui: ^0.3.0
+  lazyui: ^1.0.9
   riverpod: ^2.3.6
   shared_preferences: ^2.2.0
 

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:riverpod_example/app/core/extension.dart';
 import 'package:riverpod_example/app/utils/fetch/fetch.dart';
+import 'package:riverpod_example/app/core/extensions/list_extension.dart';
 
 import '../../data/api/api.dart';
 import '../../data/models/todo_model.dart';
@@ -41,7 +41,7 @@ class TodoNotifier extends StateNotifier<AsyncValue<List<Todo>>> with UseApi {
 
   Future markTodo(int id, bool value) async {
     try {
-      if(id == 0) {
+      if (id == 0) {
         // mark all todo
         state.whenData((data) {
           data = data.map((e) => Todo.fromJson(e.toJson()..['completed'] = value)).toList();
@@ -54,7 +54,7 @@ class TodoNotifier extends StateNotifier<AsyncValue<List<Todo>>> with UseApi {
       // find the index of the todo
       // Todo todo = (state.value ?? []).firstWhere((e) => e.id == id, orElse: () => Todo());
 
-       // shorter way to find the todo, don't need to check if state.value is null or not
+      // shorter way to find the todo, don't need to check if state.value is null or not
       Todo todo = state.value.find((e) => e.id == id, () => Todo());
 
       if (todo.id != null) {

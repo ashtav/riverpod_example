@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-extension ListExtension<E> on List<E>? {
-  E find(bool Function(E e) test, E Function() orElse) {
-    return (this ?? []).firstWhere(test, orElse: orElse);
-  }
-}
+// AutoDisposeStateNotifierProvider<AdditionExerciseNotifier, ExerciseState>
 
 extension CustomExtension<NotifierT extends StateNotifier<StateT>, StateT> on StateNotifierProvider<NotifierT, StateT> {
   /// ```dart
@@ -20,6 +16,17 @@ extension CustomExtension<NotifierT extends StateNotifier<StateT>, StateT> on St
       builder: (context, ref, _) {
         final value = ref.watch(this);
         return builder(value);
+      },
+    );
+  }
+}
+
+extension AutoDisposeStateNotifierProviderExtension<T> on AutoDisposeStateNotifierProvider<StateNotifier<T>, T> {
+  Widget watch(Widget Function(T value) builder) {
+    return Consumer(
+      builder: (context, ref, _) {
+        final asyncData = ref.watch(this);
+        return builder(asyncData);
       },
     );
   }

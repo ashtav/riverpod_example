@@ -25,14 +25,12 @@ class FormUser extends ConsumerWidget {
             LzForm.input(label: 'Name', hint: 'Enter your name', model: notifier.forms['name'], autofocus: true),
           ],
         ),
-    
         bottomNavigationBar: LzButton(
-          text: 'Submit',
-          onTap: (state) async {
-            bool ok = await notifier.update(index);
-            if(ok && context.mounted) context.pop();
-          }
-        ).theme1(),
+            text: 'Submit',
+            onTap: (state) async {
+              bool ok = await notifier.update(index);
+              if (ok && context.mounted) context.lzPop();
+            }).theme1(),
       ),
     );
   }

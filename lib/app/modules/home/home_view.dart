@@ -17,15 +17,15 @@ class HomeView extends ConsumerWidget {
       ),
       body: LzListView(
           children: ['Todo (Fetch Api)', 'User (Static Data)'].generate((item, i) {
-        return InkW(
+        return InkTouch(
           onTap: () {
             switch (i) {
               case 0:
-                context.push(const TodoView());
+                context.lzPush(const TodoView());
                 break;
 
               case 1:
-                context.push(const UsersView());
+                context.lzPush(const UsersView());
                 break;
               default:
             }

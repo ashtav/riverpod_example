@@ -13,7 +13,7 @@ class UserNotifier extends StateNotifier<AsyncValue<List<String>>> {
     if (isRefreshing) state = const AsyncValue.loading();
 
     try {
-      await Future.delayed(2.s);
+      await Future.delayed(1.s);
       state = AsyncValue.data(List.generate(3, (i) => Faker.name()));
     } catch (error, st) {
       state = AsyncValue.error(error, st);
